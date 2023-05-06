@@ -1,0 +1,44 @@
+<script>
+    function deleteProduct(title) {
+        fetch(`http://localhost:8080/products/${title}`, {
+            method: "delete"
+        })
+        window.location.href = 'http://localhost:8080/products'
+    }
+</script>
+
+
+<section class="relative">
+    <h1 class="text-4xl font-semibold text-center">{{title}}</h1>
+    <section class="products">
+        {{#each products}}
+        <div class="flex flex-col">
+
+        
+            <a class="product" href="/products/{{this.title}}">
+                <img
+                    src={{ this.thumbnail }} 
+                    alt={{ this.title }}
+                >
+                <h3 >{{ this.title }}</h3>
+                <p >${{ this.price }}</p>
+                
+            </a>
+            <div class="flex gap-2 mt-2">
+                    <button 
+                        onclick="deleteProduct('{{this.title}}')"
+                        class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-white"
+                    >
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                    <button 
+                        onclick="window.location.href='http://localhost:8080/products/update/{{this.title}}'"
+                        class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white">
+                        <i class="ri-pencil-line"></i>
+                    </button>
+                </div>
+            </div>
+        {{/each}}
+    </section>
+</section>
+
